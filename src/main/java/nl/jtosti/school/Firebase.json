@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "fir-85c07",
+  "private_key_id": "63e30af058d68ddc1f503ad419976875b5699e9e",
+  "private_key": "",
+  "client_email": "fir-85c07@appspot.gserviceaccount.com",
+  "client_id": "110056007680428055928",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://accounts.google.com/o/oauth2/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/fir-85c07%40appspot.gserviceaccount.com"
+}
