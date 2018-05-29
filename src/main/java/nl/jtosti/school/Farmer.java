@@ -1,11 +1,16 @@
 package nl.jtosti.school;
 
+import nl.jtosti.school.Farm.Farm;
+
 public class Farmer {
     private int id;
     private String name;
-    private Farm farm;
+    private int farm;
 
-    public Farmer(int id, String name, Farm farm) {
+    public Farmer() {
+    }
+
+    public Farmer(int id, String name, int farm) {
         this.id = id;
         this.name = name;
         this.farm = farm;
@@ -27,11 +32,11 @@ public class Farmer {
         this.name = name;
     }
 
-    public Farm getFarm() {
+    public int getFarm() {
         return farm;
     }
 
-    public void setFarm(Farm farm) {
+    public void setFarm(int farm) {
         this.farm = farm;
     }
 }

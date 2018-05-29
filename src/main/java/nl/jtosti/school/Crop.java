@@ -1,5 +1,7 @@
 package nl.jtosti.school;
 
+import nl.jtosti.school.Farm.Farm;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -7,12 +9,12 @@ import java.util.Map;
 public class Crop {
     private int id;
     private String name;
-    private Map<String, Boolean> farms;
+    private List<Integer> farms;
 
     public Crop() {
     }
 
-    public Crop(int id, String name, Map<String, Boolean> farms) {
+    public Crop(int id, String name, List<Integer> farms) {
         this.id = id;
         this.name = name;
         this.farms = farms;
@@ -34,19 +36,15 @@ public class Crop {
         this.name = name;
     }
 
-    public Map<String, Boolean> getFarms() {
+    public List<Integer> getFarms() {
         return farms;
     }
 
-    public void setFarms(Map<String, Boolean> farms) {
+    public void setFarms(List<Integer> farms) {
         this.farms = farms;
     }
 
-    public Map<String, Object> toMap() {
-        Map<String, Object> map = new HashMap<>();
-        map.put("id", this.id);
-        map.put("name", this.name);
-        map.put("farms", this.farms);
-        return map;
+    public void addFarm(Farm farm) {
+        this.farms.add(farm.getId());
     }
 }

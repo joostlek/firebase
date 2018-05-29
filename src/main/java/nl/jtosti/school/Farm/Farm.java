@@ -1,6 +1,11 @@
-package nl.jtosti.school;
+package nl.jtosti.school.Farm;
 
+import nl.jtosti.school.Crop;
+import nl.jtosti.school.Farmer;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Farm {
     private int id;
@@ -8,6 +13,9 @@ public class Farm {
     private String address;
     private List<Crop> crops;
     private List<Farmer> farmers;
+
+    public Farm() {
+    }
 
     public Farm(int id, String name, String address, List<Crop> crops, List<Farmer> farmers) {
         this.id = id;
@@ -49,11 +57,19 @@ public class Farm {
         this.crops = crops;
     }
 
+    public void addCrop(Crop crop) {
+        this.crops.add(crop);
+    }
+
     public List<Farmer> getFarmers() {
         return farmers;
     }
 
     public void setFarmers(List<Farmer> farmers) {
         this.farmers = farmers;
+    }
+
+    public void addFarmer(Farmer farmer) {
+        this.farmers.add(farmer);
     }
 }
