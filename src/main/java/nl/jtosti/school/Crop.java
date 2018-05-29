@@ -2,6 +2,7 @@ package nl.jtosti.school;
 
 import nl.jtosti.school.Farm.Farm;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,12 +10,12 @@ import java.util.Map;
 public class Crop {
     private int id;
     private String name;
-    private List<Integer> farms;
+    private ArrayList<Integer> farms;
 
     public Crop() {
     }
 
-    public Crop(int id, String name, List<Integer> farms) {
+    public Crop(int id, String name, ArrayList<Integer> farms) {
         this.id = id;
         this.name = name;
         this.farms = farms;
@@ -36,11 +37,11 @@ public class Crop {
         this.name = name;
     }
 
-    public List<Integer> getFarms() {
+    public ArrayList<Integer> getFarms() {
         return farms;
     }
 
-    public void setFarms(List<Integer> farms) {
+    public void setFarms(ArrayList<Integer> farms) {
         this.farms = farms;
     }
 

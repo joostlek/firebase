@@ -32,18 +32,7 @@ public class FirestoreFarm extends FirestoreDao implements FarmDao {
         List<QueryDocumentSnapshot> querySnapshot = future.get().getDocuments();
         if (querySnapshot.size() >= 1) {
             DocumentReference document = querySnapshot.get(0).getReference();
-            document.update("name", farm.getName());
-            document.update("address", farm.getAddress());
-            List<DocumentReference> crops = new ArrayList<>();
-            for (Crop crop: farm.getCrops()) {
-                crops.add(FirestoreCrop.saveCrop(crop));
-            }
-            document.update("crops", crops);
-            List<DocumentReference> farmers = new ArrayList<>();
-            for (Farmer farmer: farm.getFarmers()) {
-                farmers.add(FirestoreFarmer.saveFarmer(farmer));
-            }
-            document.update("farmers", farmers);
+            document.set(farm);
             return farm;
         }
         return null;
@@ -54,23 +43,21 @@ public class FirestoreFarm extends FirestoreDao implements FarmDao {
         Firestore db = getFirestore();
         CollectionReference collectionReference = db.collection("farms");
         ApiFuture<DocumentReference> future = collectionReference.add(farm);
-        FirestoreCrop firestoreCrop = new FirestoreCrop();
-        List<DocumentReference> crops = new ArrayList<>();
-        for (Crop crop: farm.getCrops()) {
-            crops.add(firestoreCrop.saveCrop(crop));
-        }
-        future.get().update("crops", crops);
-        FirestoreFarmer firestoreFarmer = new FirestoreFarmer();
-        List<DocumentReference> farmers = new ArrayList<>();
-        for (Farmer farmer: farm.getFarmers()) {
-            farmers.add(firestoreFarmer.saveFarmer(farmer));
-        }
-        future.get().update("farmers", farmers);
         return farm;
     }
 
     @Override
-    public boolean delete(Farm farm) {
+    public boolean delete(Farm farm) throws ExecutionException, InterruptedException {
+        Firestore db = getFirestore();
+        CollectionReference collectionReference = db.collection("farms");
+        ApiFuture<QuerySnapshot> future = collectionReference.whereEqualTo("id", farm.getId()).get();
+        List<QueryDocumentSnapshot> querySnapshot = future.get().getDocuments();
+        if (querySnapshot.size() >= 1) {
+            DocumentReference document = querySnapshot.get(0).getReference();
+            ApiFuture<WriteResult> future1 = document.delete();
+            System.out.println(future1.get().getUpdateTime());
+            return true;
+        }
         return false;
     }
 }

@@ -1,13 +1,8 @@
 package nl.jtosti.school;
 
-import com.google.api.core.ApiFuture;
 import com.google.auth.oauth2.GoogleCredentials;
-import com.google.cloud.firestore.DocumentSnapshot;
-import com.google.cloud.firestore.QueryDocumentSnapshot;
-import com.google.cloud.firestore.QuerySnapshot;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
-import com.google.firebase.cloud.FirestoreClient;
 import nl.jtosti.school.Farm.Farm;
 import nl.jtosti.school.Farm.FirestoreFarm;
 
@@ -15,8 +10,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.concurrent.ExecutionException;
 
 /**
@@ -33,7 +26,7 @@ public class App
                 .build();
         FirebaseApp.initializeApp(options);
         FirestoreFarm firestoreFarm = new FirestoreFarm();
-        Farm farm = new Farm(1, "SUNNY", "asd", new ArrayList<>(), new ArrayList<>());
+        Farm farm = new Farm(2, "My Farm", "Daltonlaan 200, Utrecht", new ArrayList<>(), new ArrayList<>());
         Crop boemkool = new Crop(1, "BOEMKOOL", new ArrayList<>());
         Crop witlof = new Crop(2, "WITHLOV", new ArrayList<>());
         Farmer anderson = new Farmer(2, "Hans Anderson", farm.getId());
@@ -41,17 +34,31 @@ public class App
         farm.addCrop(boemkool);
         boemkool.addFarm(farm);
         farm.addFarmer(anderson);
+        // CREATED OBJECTS
+        pressKeyToContinue();
         firestoreFarm.add(farm);
-        farm.setName("KEKEKEKEK");
+        // ADDED FARM TO FIRESTORE
+        pressKeyToContinue();
+        System.out.println(firestoreFarm.get(2).getAddress());
+        // GET FARM 1
+        pressKeyToContinue();
+        farm.setName("His Farm");
         farm.addCrop(witlof);
         witlof.addFarm(farm);
         firestoreFarm.update(farm);
+        // UPDATED FARM (ADDED WITLOF AND CHANGED NAME
+        pressKeyToContinue();
+        System.out.print(firestoreFarm.delete(farm));
+        // DELETED FARM
+        pressKeyToContinue();
+    }
 
-        Farm farm1 = new Farm(2, "FARMMRAF", "dsa", new ArrayList<>(), new ArrayList<>());
-        farm1.addCrop(witlof);
-        witlof.addFarm(farm1);
-        farm1.addFarmer(anders);
-        anders.setFarm(farm1.getId());
-        firestoreFarm.add(farm1);
+    private static void pressKeyToContinue() {
+        System.out.println("Press key to continue");
+        try {
+            System.in.read();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

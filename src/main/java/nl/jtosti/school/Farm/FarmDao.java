@@ -6,5 +6,5 @@ public interface FarmDao {
     Farm get(int id) throws ExecutionException, InterruptedException;
     Farm update(Farm farm) throws ExecutionException, InterruptedException;
     Farm add(Farm farm) throws ExecutionException, InterruptedException;
-    boolean delete(Farm farm);
+    boolean delete(Farm farm) throws ExecutionException, InterruptedException;
 }
